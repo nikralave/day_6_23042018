@@ -1,0 +1,181 @@
+// -------child selector----------------
+
+// .wrapper {
+//   .main {
+//       .container {
+//           .article {
+//               .post {
+//                   p {
+//                       color: blue;
+//                   }
+//               }
+//           }
+//       }
+//   }
+// }
+
+
+// -------parent selector----------------
+
+// .main {
+//     .wrapper & {
+//         width: 300px;
+//         height: 300px;
+//         background-color: yellow;
+//     }
+// }
+
+// -------child selector----------------
+
+// p {
+//     font: {
+//         family: open-sans;
+//         size: 30px;
+//         weight: 500;
+//     }
+    
+//     text: {
+//         align: center;
+//         transform: uppercase;
+//     }
+// }
+
+// %backgroundImage {
+//     background: {
+//         size: cover;
+//         position: center center;
+//         repeat: no-repeat;
+        
+//     }
+// }
+
+// div {
+//     @extend %backgroundImage;
+// }
+
+// .container {
+// 	background-image: url("https://dummyimage.com/450x250/f00/fff");
+// }
+
+// .article {
+// 	background-image: url("https://dummyimage.com/450x250/000/fff");
+// }
+
+// .post {
+// 	background-image: url("https://dummyimage.com/450x250/ddd/fff");
+// }
+
+//---------------functions---------------------------
+
+// @function pxToEm($value, $base) {
+//     @return ($value/$base) + em;
+// }
+
+// h1 {
+//     font-size: pxToEm(32,16);
+// }
+//---------------variables---------------------------
+
+$blue: #0997d3;
+$red: #e84610;
+$green: #bada55;
+$black: #000000;
+$white: #ffffff;
+
+$colors: (
+    black: #000000,
+    red: #e84610,
+    green: #bada55, 
+);
+
+@each $key, $value in $colors {
+    .item-#{$key} {
+        background-color: $value;
+    }
+}
+
+body {
+    background-color: $black;
+}
+
+// div {
+//     width: $width;
+//     height: $height;
+//     border: 1px solid black;
+// }
+
+h1 {
+    color: $white;
+}
+
+$class: container;
+
+div.#{$class} {
+    background-color: orange;
+}
+
+$class-name: item;
+
+@for $i from 1 through 4 {
+    .#{$class-name}-#{$i} {
+        width: 60px + $i;
+    }
+}
+
+$random:5;
+
+h1 {
+    @if $random > 5 {
+        color: blue;
+    } @else if $random == 3 {
+        color: purple;
+    } @else {
+        color: orange;
+    }
+}
+
+
+h1 {
+    @if 1 + 1 == 2 {
+        border: 1px solid black;
+    }
+    
+}
+
+//------------------Mixins-----------------
+
+@mixin button($color, $size) {
+    width: $size;
+    height: $size / 2;
+    border: 1px solid $color;
+    
+    @if $color == #e84610 {
+        color: #fff;
+    } @else {
+        color: $color;
+    }
+}
+
+@mixin unicornify() {
+    background-color: pink;
+    color: white;
+    @content;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+p {
+    @include unicornify{
+        border: 1px solid pink;
+        border-radius: 100%;
+    }
+}
+
+.btn {
+    @include button(#e84610, 200px)
+}
+
+
+
+    
+        
